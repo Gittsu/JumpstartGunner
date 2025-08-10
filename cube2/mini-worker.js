@@ -15,8 +15,8 @@ Module.autoexec = function() {
 };
 Module.postLoadWorld = function() {
   Module.tweakDetail();
-  BananaBread.execute('sensitivity 10');
-  BananaBread.execute('clearconsole');
+  JumpstartGunner.execute('sensitivity 10');
+  JumpstartGunner.execute('clearconsole');
 };
 
 importScripts("js/api.js");

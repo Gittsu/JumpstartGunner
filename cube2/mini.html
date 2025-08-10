@@ -1285,9 +1285,9 @@
         },
         onFullScreen: function(isFullScreen) {
           if (isFullScreen) {
-            BananaBread.execute('screenres ' + screen.width + ' ' + screen.height);
+            JumpstartGunner.execute('screenres ' + screen.width + ' ' + screen.height);
           } else {
-            BananaBread.execute('screenres ' + 640 + ' ' + 480);
+            JumpstartGunner.execute('screenres ' + 640 + ' ' + 480);
           }
         },
       };
@@ -1309,8 +1309,8 @@
       };
       Module.postLoadWorld = function() {
         Module.tweakDetail();
-        BananaBread.execute('sensitivity 10');
-        BananaBread.execute('clearconsole');
+        JumpstartGunner.execute('sensitivity 10');
+        JumpstartGunner.execute('clearconsole');
       };
     </script>
 

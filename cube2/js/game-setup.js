@@ -90,7 +90,7 @@ console.log(text);
       document.querySelector('.status .ingame').classList.add( 'hide' );
       Module.canvas.classList.remove( 'paused' );
       Module.canvas.classList.remove( 'hide' );
-      //BananaBread.execute('musicvol $oldmusicvol'); // XXX TODO: need to restart the music by name here
+      //JumpstartGunner.execute('musicvol $oldmusicvol'); // XXX TODO: need to restart the music by name here
     } else {
       Module.pauseMainLoop();
       Module.setOpacity(0.333);
@@ -98,7 +98,7 @@ console.log(text);
       Module.canvas.classList.add( 'paused' );
       document.querySelector('.status .ingame').classList.remove( 'hide' );
       Module.canvas.classList.add( 'hide' );
-      //BananaBread.execute('oldmusicvol = $musicvol ; musicvol 0');
+      //JumpstartGunner.execute('oldmusicvol = $musicvol ; musicvol 0');
     }
   }
 };
@@ -129,7 +129,7 @@ if (Module.benchmark) {
     if (iter == 1) {
       Module.progressElement.hidden = false;
       Module.progressElement.max = Module.benchmark.totalIters;
-      BananaBread.execute('spectator 1 ; nextfollow'); // do not get shot at by bots
+      JumpstartGunner.execute('spectator 1 ; nextfollow'); // do not get shot at by bots
     } else if (iter % Module.benchmark.progressTick == 1) {
       Module.progressElement.value = iter; // TODO: check if this affects performance
     } else if (iter >= Module.benchmark.totalIters) {
@@ -152,7 +152,7 @@ if (Module.benchmark) {
         document.getElementById('main_text').innerHTML = results.replace(/\n/g, '<br>');
       }
     } else if (iter % 333 == 5) {
-      BananaBread.execute('nextfollow');
+      JumpstartGunner.execute('nextfollow');
     }
   };
 }
@@ -259,7 +259,7 @@ Module.setOpacity(0.1);
 Module.fullscreenCallbacks = [];
 
 Module.postLoadWorld = function() {
-  document.title = 'BananaBread';
+  document.title = 'JumpstartGunner';
 
   if (Module.loadingMusic) {
     Module.loadingMusic.pause();
@@ -267,11 +267,11 @@ Module.postLoadWorld = function() {
   }
   Module.tweakDetail();
 
-  BananaBread.execute('sensitivity 10');
-  BananaBread.execute('clearconsole');
+  JumpstartGunner.execute('sensitivity 10');
+  JumpstartGunner.execute('clearconsole');
 
   setTimeout(function() {
-    BananaBread.execute('oldmusicvol = $musicvol ; musicvol 0');
+    JumpstartGunner.execute('oldmusicvol = $musicvol ; musicvol 0');
   }, 1); // Do after startup finishes so music will be prepared up
 
   if (checkPageParam('windowed')) {
@@ -317,7 +317,7 @@ Module.postLoadWorld = function() {
       Module.requestFullScreen(true);
       Module.setOpacity(1);
       Module.setStatus('');
-      BananaBread.execute('screenres ' + screen.width + ' ' + screen.height);
+      JumpstartGunner.execute('screenres ' + screen.width + ' ' + screen.height);
       Module.resumeMainLoop();
       Module.fullscreenCallbacks.forEach(function(callback) { callback() });
     };
@@ -358,58 +358,58 @@ Module.tweakDetail = function(){}; // called from postLoadWorld, so useful to ma
 
 // Public API
 
-var BananaBread = {
+var JumpstartGunner = {
   // TODO: use api.js
   init: function() {
-    BananaBread.setPlayerModelInfo = Module.cwrap('_ZN4game18setplayermodelinfoEPKcS1_S1_S1_S1_S1_S1_S1_S1_S1_S1_S1_b', null,
+    JumpstartGunner.setPlayerModelInfo = Module.cwrap('_ZN4game18setplayermodelinfoEPKcS1_S1_S1_S1_S1_S1_S1_S1_S1_S1_S1_b', null,
       ['string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'number']);
-    BananaBread.execute = Module.cwrap('_Z7executePKc', 'number', ['string']);
-    BananaBread.executeString = Module.cwrap('_Z10executestrPKc', 'string', ['string']);
+    JumpstartGunner.execute = Module.cwrap('_Z7executePKc', 'number', ['string']);
+    JumpstartGunner.executeString = Module.cwrap('_Z10executestrPKc', 'string', ['string']);
 
     var forceCamera = Module.cwrap('setforcecamera', null, ['number', 'number', 'number', 'number', 'number', 'number']);
-    BananaBread.forceCamera = function(position, orientation) {
+    JumpstartGunner.forceCamera = function(position, orientation) {
       forceCamera(position[0], position[1], position[2], orientation[0], orientation[1], orientation[2]);
     };
 
-    BananaBread.PARTICLE = {};
+    JumpstartGunner.PARTICLE = {};
     var i = 0;
-    BananaBread.PARTICLE.BLOOD = (i++);
-    BananaBread.PARTICLE.WATER = (i++);
-    BananaBread.PARTICLE.SMOKE = (i++);
-    BananaBread.PARTICLE.STEAM = (i++);
-    BananaBread.PARTICLE.FLAME = (i++);
-    BananaBread.PARTICLE.FIREBALL1 = (i++);
-    BananaBread.PARTICLE.FIREBALL2 = (i++);
-    BananaBread.PARTICLE.FIREBALL3 = (i++);
-    BananaBread.PARTICLE.STREAK = (i++);
-    BananaBread.PARTICLE.LIGHTNING = (i++);
-    BananaBread.PARTICLE.EXPLOSION = (i++);
-    BananaBread.PARTICLE.EXPLOSION_BLUE = (i++);
-    BananaBread.PARTICLE.SPARK = (i++);
-    BananaBread.PARTICLE.EDIT = (i++);
-    BananaBread.PARTICLE.SNOW = (i++);
-    BananaBread.PARTICLE.MUZZLE_FLASH1 = (i++);
-    BananaBread.PARTICLE.MUZZLE_FLASH2 = (i++);
-    BananaBread.PARTICLE.MUZZLE_FLASH3 = (i++);
-    BananaBread.PARTICLE.HUD_ICON = (i++);
-    BananaBread.PARTICLE.HUD_ICON_GREY = (i++);
-    BananaBread.PARTICLE.TEXT = (i++);
-    BananaBread.PARTICLE.METER = (i++);
-    BananaBread.PARTICLE.METER_VS = (i++);
-    BananaBread.PARTICLE.LENS_FLARE = (i++);
+    JumpstartGunner.PARTICLE.BLOOD = (i++);
+    JumpstartGunner.PARTICLE.WATER = (i++);
+    JumpstartGunner.PARTICLE.SMOKE = (i++);
+    JumpstartGunner.PARTICLE.STEAM = (i++);
+    JumpstartGunner.PARTICLE.FLAME = (i++);
+    JumpstartGunner.PARTICLE.FIREBALL1 = (i++);
+    JumpstartGunner.PARTICLE.FIREBALL2 = (i++);
+    JumpstartGunner.PARTICLE.FIREBALL3 = (i++);
+    JumpstartGunner.PARTICLE.STREAK = (i++);
+    JumpstartGunner.PARTICLE.LIGHTNING = (i++);
+    JumpstartGunner.PARTICLE.EXPLOSION = (i++);
+    JumpstartGunner.PARTICLE.EXPLOSION_BLUE = (i++);
+    JumpstartGunner.PARTICLE.SPARK = (i++);
+    JumpstartGunner.PARTICLE.EDIT = (i++);
+    JumpstartGunner.PARTICLE.SNOW = (i++);
+    JumpstartGunner.PARTICLE.MUZZLE_FLASH1 = (i++);
+    JumpstartGunner.PARTICLE.MUZZLE_FLASH2 = (i++);
+    JumpstartGunner.PARTICLE.MUZZLE_FLASH3 = (i++);
+    JumpstartGunner.PARTICLE.HUD_ICON = (i++);
+    JumpstartGunner.PARTICLE.HUD_ICON_GREY = (i++);
+    JumpstartGunner.PARTICLE.TEXT = (i++);
+    JumpstartGunner.PARTICLE.METER = (i++);
+    JumpstartGunner.PARTICLE.METER_VS = (i++);
+    JumpstartGunner.PARTICLE.LENS_FLARE = (i++);
     var splash = Module.cwrap('bb_splash', null, ['number', 'number', 'number', 'number', 'number', 'number', 'number', 'number', 'number', 'number']);
-    BananaBread.splash = function(type, color, radius, num, fade, p, size, gravity) {
+    JumpstartGunner.splash = function(type, color, radius, num, fade, p, size, gravity) {
       splash(type, color, radius, num, fade, p[0], p[1], p[2], size, gravity);
     };
 
     var playSoundName = Module.cwrap('bb_playsoundname', null, ['string', 'number', 'number', 'number']);
-    BananaBread.playSound = function(name, position) {
+    JumpstartGunner.playSound = function(name, position) {
       playSoundName(name, position[0], position[1], position[2]);
     };
   },
 };
 
-Module.postRun.push(BananaBread.init);
+Module.postRun.push(JumpstartGunner.init);
 Module.postRun.push(function() {
   var n = 0;
   for (var x in Module.preloadedAudios) n++;
@@ -419,13 +419,13 @@ Module.postRun.push(function() {
 
 // Additional APIs
 
-BananaBread.Utils = {
+JumpstartGunner.Utils = {
   randomPick: function(items) {
     return items[Math.floor(Math.random()*items.length)];
   },
 };
 
-BananaBread.Event = function(data) {
+JumpstartGunner.Event = function(data) {
   this.run = function() {
     var start = Date.now();
     var last = start;
@@ -442,9 +442,9 @@ BananaBread.Event = function(data) {
   if (data.onInit) data.onInit(data);
 }
 
-BananaBread.Effects = {
+JumpstartGunner.Effects = {
   Fireworks: function(shots) {
-    var event = new BananaBread.Event({
+    var event = new JumpstartGunner.Event({
       totalMs: Infinity,
 
       onFrame: function(ms) {
@@ -457,19 +457,19 @@ BananaBread.Effects = {
           shot.velocity[2] -= secs * 200; // gravity
           shot.msLeft -= ms;
           if (shot.msLeft > 0) {
-            BananaBread.splash(BananaBread.PARTICLE.SPARK, 0xffffff, 1, 20, Math.max(50, ms*2), shot.position, 1, 1);
+            JumpstartGunner.splash(JumpstartGunner.PARTICLE.SPARK, 0xffffff, 1, 20, Math.max(50, ms*2), shot.position, 1, 1);
             return true;
           } else {
             var size = Math.ceil(Math.random()*3); // 1, 2 or 3
             var color;
             for (var i = 0; i < 2; i++) {
               color = Math.floor(Math.random()*255) + (Math.floor(Math.random()*255) << 8) + (Math.floor(Math.random()*255) << 16);
-              BananaBread.splash(BananaBread.PARTICLE.SPARK, color, 100+25*size, 7+3*size, Math.max(300, ms*7), shot.position, 1+size, 1);
+              JumpstartGunner.splash(JumpstartGunner.PARTICLE.SPARK, color, 100+25*size, 7+3*size, Math.max(300, ms*7), shot.position, 1+size, 1);
             }
             if (size > 1) {
-              BananaBread.splash(BananaBread.PARTICLE.EXPLOSION, color, 0, 1, Math.max(175, ms*3), shot.position, 5*size, 0);
+              JumpstartGunner.splash(JumpstartGunner.PARTICLE.EXPLOSION, color, 0, 1, Math.max(175, ms*3), shot.position, 5*size, 0);
             }
-            BananaBread.playSound(size == 3 ? 'q009/explosion.ogg' : 'olpc/MichaelBierylo/sfx_DoorSlam.wav', shot.position);
+            JumpstartGunner.playSound(size == 3 ? 'q009/explosion.ogg' : 'olpc/MichaelBierylo/sfx_DoorSlam.wav', shot.position);
             return false;
           }
         });
@@ -529,7 +529,7 @@ function CameraPath(data) { // TODO: namespace this
       }
       LinearMath.vec3.scale(position, 1/factors);
       LinearMath.vec3.scale(orientation, 1/factors);
-      BananaBread.forceCamera(position, orientation);
+      JumpstartGunner.forceCamera(position, orientation);
       Module.requestAnimationFrame(moveCamera);
     }
     Module.fullscreenCallbacks.push(moveCamera);

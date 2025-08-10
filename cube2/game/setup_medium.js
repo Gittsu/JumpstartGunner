@@ -1,16 +1,16 @@
 
 Module.setPlayerModels = function() {
-  BananaBread.setPlayerModelInfo("snoutx10k", "snoutx10k", "snoutx10k", "snoutx10k/hudguns", 0, 0, 0, 0, 0, "snoutx10k", "snoutx10k", "snoutx10k", true);
+  JumpstartGunner.setPlayerModelInfo("snoutx10k", "snoutx10k", "snoutx10k", "snoutx10k/hudguns", 0, 0, 0, 0, 0, "snoutx10k", "snoutx10k", "snoutx10k", true);
 };
 
 Module.autoexec = function() {
-  BananaBread.execute('aniso 4');
+  JumpstartGunner.execute('aniso 4');
 };
 
 Module.tweakDetail = function() {
-  BananaBread.execute('maxdebris 17');
-  BananaBread.execute('waterreflect 1');
-  BananaBread.execute('waterrefract 1');
+  JumpstartGunner.execute('maxdebris 17');
+  JumpstartGunner.execute('waterreflect 1');
+  JumpstartGunner.execute('waterrefract 1');
 
   new CameraPath({
     steps: [{
@@ -83,6 +83,6 @@ Module.tweakDetail = function() {
 };
 
 Module.loadDefaultMap = function() {
-  BananaBread.execute('sleep 10 [ effic two_towers ]');
+  JumpstartGunner.execute('sleep 10 [ effic two_towers ]');
 };
 

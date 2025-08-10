@@ -1,25 +1,25 @@
 
-The BananaBread Engine
+The JumpstartGunner Engine
 ======================
 
 ---
 
 Notice
 ------
-BananaBread is no longer under active development. A fork of this project, [cfoust/sour](https://github.com/cfoust/sour), has continued the effort. Among other things, it adds support for multiplayer servers, upgrades the engine to the latest version of Sauerbraten, and supports all of the game's maps.
+JumpstartGunner is no longer under active development. A fork of this project, [cfoust/sour](https://github.com/cfoust/sour), has continued the effort. Among other things, it adds support for multiplayer servers, upgrades the engine to the latest version of Sauerbraten, and supports all of the game's maps.
 
 ---
 
 A port of the Cube 2/Sauerbraten 3D game engine/first person shooter to the
 web, compiling C++ and OpenGL to JavaScript and WebGL using Emscripten.
 
-See the **[FAQ](https://github.com/kripken/BananaBread/wiki/FAQ)**.
+See the **[FAQ](https://github.com/kripken/JumpstartGunner/wiki/FAQ)**.
 
 
 Demos
 -----
 
-**[A live demo is available](https://kripken.github.io/BananaBread/cube2/bb.html)**. Note that it requires [WebAssembly](http://webassembly.org/).
+**[A live demo is available](https://kripken.github.io/JumpstartGunner/cube2/bb.html)**. Note that it requires [WebAssembly](http://webassembly.org/).
 
 
 Overview
@@ -86,7 +86,7 @@ Modding
 
 To use maps of your own or make other kinds of changes or additions to the
 artwork, see the
-**[Modding](https://github.com/kripken/BananaBread/wiki/Modding)**
+**[Modding](https://github.com/kripken/JumpstartGunner/wiki/Modding)**
 page.
 
 
@@ -107,7 +107,7 @@ License
 Code is zlib licensed (just like Sauerbraten):
 
 Copyright (C) 2001-2012 Sauerbraten authors (see cube2/src/readme_source.txt)
-and BananaBread authors (see below)
+and JumpstartGunner authors (see below)
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
@@ -125,7 +125,7 @@ freely, subject to the following restrictions:
    misrepresented as being the original software.
 3. This notice may not be removed or altered from any source distribution.
 
-BananaBread authors:
+JumpstartGunner authors:
 
  * Alon Zakai
  * Gregor Koch
